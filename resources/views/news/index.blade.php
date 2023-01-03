@@ -14,9 +14,13 @@
                     </div>
                     @endif
 
+                    @auth
+                    <button onclick="location.href='{{route('news.create')}}'" type="button" class="btn btn-primary">Add New Post</button>
+                    @endauth
+
                     @foreach($news as $post)
                     <div class="card mb-3">
-                        <img class="card-img-top" src="..." alt="Card image cap">
+                        <img class="card-img-top" src={{asset("storage/news/$post->img_file_path")}} alt="Card image cap">
                         <div class="card-body">
                             <h5 class="card-title">{{$post->title}}</h5>
                             <p class="card-text">{{$post->content}}</p>

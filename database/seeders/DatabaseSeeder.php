@@ -27,6 +27,7 @@ class DatabaseSeeder extends Seeder
         \App\Models\News::factory()->create([
             'title' => 'Nieuwsbericht 1',
             'content' => 'Lorem ipsum, dolor sit amet consectetur adipisicing elit. Necessitatibus vel est doloremque facere possimus nesciunt iure numquam iusto, laboriosam, eveniet dicta, temporibus nemo incidunt unde! Veritatis quae nobis quis minima!',
+            'img_file_path' => 'uzQ2wsos8rCgYuMSAV6nR2IhIQimX9pWnqdzDrSR.png',
             'user_id' => 1
         ]);
     }

@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\News;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Log;
 
 class NewsController extends Controller
 {
@@ -25,7 +27,7 @@ class NewsController extends Controller
      */
     public function create()
     {
-        //
+        return view('news.create');
     }
 
     /**
@@ -36,7 +38,25 @@ class NewsController extends Controller
      */
     public function store(Request $request)
     {
-        //
+
+        $validated = $request->validate([
+            'title' => 'required|min:5',
+            'content' => 'required|min:5',
+            'file' => 'mimes:png,jpg',
+        ]);
+        
+        error_log("validatie gelukt");
+        $validated['file']->store('news', 'public');
+
+        $newsPost = new News;
+        $newsPost->title = $validated['title'];
+        $newsPost->content = $validated['content'];
+        $newsPost->img_file_path = $validated['file']->hashName();
+        $newsPost->user_id = Auth::user()->id;
+        $newsPost->save();
+
+        return redirect()->route('index')->with('status', 'Newspost added');
+
     }
 
     /**
