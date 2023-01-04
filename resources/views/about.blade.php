@@ -13,6 +13,8 @@
         <li><a href="https://getbootstrap.com/docs/4.0/components/forms/">Bootstrap forms</a></li>
         <li><a href="https://mdbootstrap.com/docs/standard/extended/avatar/">Bootstrap avatar</a></li>
         <li><a href="https://getbootstrap.com/docs/5.0/components/badge/">Bootstrap badges</a></li>
+        <li><a href="https://larainfo.com/blogs/how-to-use-datepicker-in-laravel-9-with-bootstrap-5">Datepicker</a></li>
+        <li><a href="https://www.youtube.com/watch?v=oM9sKpF35Xw">Checkbox to boolean</a></li>
     </ul>
 </div>
 @endsection

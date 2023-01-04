@@ -20,9 +20,9 @@ return new class extends Migration
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
             $table->boolean('is_admin')->default(false);
-            $table->date('birthday');
-            $table->string('avatar');
-            $table->text('about_me');
+            $table->date('birthday')->nullable();
+            $table->string('avatar')->nullable();
+            $table->text('about_me')->nullable();
             $table->rememberToken();
             $table->timestamps();
         });
