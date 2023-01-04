@@ -15,7 +15,9 @@
                     @endif
 
                     @auth
-                    <button onclick="location.href='{{route('news.create')}}'" type="button" class="btn btn-primary">Add New Post</button>
+                        @if (Auth::user()->is_admin)
+                            <button onclick="location.href='{{route('news.create')}}'" type="button" class="btn btn-primary">Add New Post</button>
+                        @endif
                     @endauth
 
                     @foreach($news as $post)
@@ -25,8 +27,12 @@
                             <h5 class="card-title">{{$post->title}}</h5>
                             <p class="card-text">{{$post->content}}</p>
                             <p class="card-text"><small class="text-muted">Posted by {{$post->user->name}} {{$post->created_at->diffForHumans()}} </small></p>
-                            <button type="button" class="btn btn-primary">Edit</button>
-                            <button type="button" class="btn btn-danger">Delete</button>
+                            @auth
+                                @if ($post->user_id == Auth::user()->id)
+                                    <button onclick="location.href='{{route('news.edit', $post->id)}}'" type="button" class="btn btn-primary">Edit</button>
+                                    <button type="button" class="btn btn-danger">Delete</button>
+                                @endif
+                            @endauth
                         </div>
                     </div>
                     @endforeach

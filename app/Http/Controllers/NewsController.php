@@ -4,11 +4,18 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\News;
+use Error;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\File;
 
 class NewsController extends Controller
 {
+
+    public function __construct()
+    {
+        $this->middleware('auth', ['except' => ['index']]);
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -16,7 +23,7 @@ class NewsController extends Controller
      */
     public function index()
     {
-        $news = News::all();
+        $news = News::latest()->get();
         return view('news.index', compact('news'));
     }
 
@@ -38,14 +45,12 @@ class NewsController extends Controller
      */
     public function store(Request $request)
     {
-
         $validated = $request->validate([
             'title' => 'required|min:5',
             'content' => 'required|min:5',
             'file' => 'mimes:png,jpg',
         ]);
         
-        error_log("validatie gelukt");
         $validated['file']->store('news', 'public');
 
         $newsPost = new News;
@@ -78,7 +83,12 @@ class NewsController extends Controller
      */
     public function edit($id)
     {
-        //
+        $post = News::findOrFail($id);
+
+        if($post->user_id != Auth::user()->id){
+            abort(403);
+        }
+        return view('news.edit', compact('post'));
     }
 
     /**
@@ -90,7 +100,37 @@ class NewsController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $post = News::findOrFail($id);
+
+        if($post->user_id != Auth::user()->id){
+            abort(403);
+        }
+
+        $validated = $request->validate([
+            'title' => 'required|min:5',
+            'content' => 'required|min:5',
+        ]);
+
+        if($request->hasFile('file')){
+            
+            $request->validate([
+                'file' => 'mimes:png,jpg'
+            ]);
+
+            $request->file->store('news', 'public');
+            $image_path = public_path('news'). '/' . $post->img_file_path;
+            // unlink($image_path);                                                     should delete old image from storage/app/public/news but throws notFoundException
+
+            $post->img_file_path = $request->file->hashName();
+        }
+        
+        
+        $post->title = $validated['title'];
+        $post->content = $validated['content'];
+        $post->user_id = Auth::user()->id;
+        $post->save();
+
+        return redirect()->route('index')->with('status', 'Newspost edited');
     }
 
     /**
