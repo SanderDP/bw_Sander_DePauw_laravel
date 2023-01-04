@@ -85,8 +85,8 @@ class NewsController extends Controller
     {
         $post = News::findOrFail($id);
 
-        if($post->user_id != Auth::user()->id){
-            abort(403);
+        if(!Auth::user()->is_admin){
+            abort(403, 'Only admins can edit posts.');
         }
         return view('news.edit', compact('post'));
     }
@@ -102,8 +102,8 @@ class NewsController extends Controller
     {
         $post = News::findOrFail($id);
 
-        if($post->user_id != Auth::user()->id){
-            abort(403);
+        if(!Auth::user()->is_admin){
+            abort(403, 'Only admins can edit posts.');
         }
 
         $validated = $request->validate([
@@ -141,6 +141,17 @@ class NewsController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $post = News::findOrFail($id);
+
+        if(!Auth::user()->is_admin){
+            abort(403, 'Only admins can delte posts.');
+        }
+
+        $image_path = public_path('news'). '/' . $post->img_file_path;
+        // unlink($image_path);                                                     should delete old image from storage/app/public/news but throws notFoundException
+
+        $post->delete();
+
+        return redirect()->route('index')->with('status', 'Newspost deleted');
     }
 }

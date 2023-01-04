@@ -28,9 +28,13 @@
                             <p class="card-text">{{$post->content}}</p>
                             <p class="card-text"><small class="text-muted">Posted by {{$post->user->name}} {{$post->created_at->diffForHumans()}} </small></p>
                             @auth
-                                @if ($post->user_id == Auth::user()->id)
-                                    <button onclick="location.href='{{route('news.edit', $post->id)}}'" type="button" class="btn btn-primary">Edit</button>
-                                    <button type="button" class="btn btn-danger">Delete</button>
+                                @if (Auth::user()->is_admin)
+                                    <form method="POST" action="{{route('news.destroy', $post->id)}}">
+                                        @csrf
+                                        @method("delete")
+                                        <button onclick="location.href='{{route('news.edit', $post->id)}}'" type="button" class="btn btn-primary">Edit</button>
+                                        <input type="submit" value="Delete" class="btn btn-danger" onclick="return confirm('Are you sure you want to delete this post?');">
+                                    </form>
                                 @endif
                             @endauth
                         </div>
