@@ -33,6 +33,9 @@
                         <li class="nav-item">
                             <a class="nav-link" href="/news">Latest news</a>
                         </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="/users">User Profiles</a>
+                        </li>
                     </ul>
 
                     <!-- Right Side Of Navbar -->

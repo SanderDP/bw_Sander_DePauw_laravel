@@ -11,6 +11,8 @@
         <li><a href="https://stackoverflow.com/questions/50997652/laravel-retrieve-images-from-storage-to-view">accessing assets stored in storage</a></li>
         <li><a href="https://getbootstrap.com/docs/4.0/components/buttons/">Bootstrap buttons</a></li>
         <li><a href="https://getbootstrap.com/docs/4.0/components/forms/">Bootstrap forms</a></li>
+        <li><a href="https://mdbootstrap.com/docs/standard/extended/avatar/">Bootstrap avatar</a></li>
+        <li><a href="https://getbootstrap.com/docs/5.0/components/badge/">Bootstrap badges</a></li>
     </ul>
 </div>
 @endsection

@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\NewsController;
+use App\Http\Controllers\UserController;
 
 /*
 |--------------------------------------------------------------------------
@@ -19,6 +20,8 @@ Route::get('/', [App\Http\Controllers\NewsController::class, 'index'])->name('in
 Route::get('/about', function(){
     return view('about');
 });
+
+Route::resource('users', UserController::class);
 
 Route::resource('news', NewsController::class);
 
