@@ -92,6 +92,9 @@ class UserController extends Controller
         if(!Auth::user()->is_admin){
             abort(403, 'Only admins can demote users.');
         }
+        else if(Auth::user() == $user){
+            abort(403, 'Admins cannot demote themselves.');
+        }
 
         $user->is_admin = false;
         $user->save();
