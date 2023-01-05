@@ -37,6 +37,9 @@
                         <li class="nav-item">
                             <a class="nav-link" href="/users">User Profiles</a>
                         </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="/FAQ">FAQ</a>
+                        </li>
                     </ul>
 
                     <!-- Right Side Of Navbar -->

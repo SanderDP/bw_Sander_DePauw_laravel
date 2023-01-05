@@ -1,8 +1,12 @@
 <?php
 
+use App\Http\Controllers\FAQCategoriesController;
+use App\Http\Controllers\FAQuestionsController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\NewsController;
 use App\Http\Controllers\UserController;
+use App\Models\FAQCategories;
+use App\Models\FAQuestions;
 
 /*
 |--------------------------------------------------------------------------
@@ -26,6 +30,9 @@ Route::get('users/{user}/promote', [UserController::class, 'promote'])->name('us
 Route::get('users/{user}/demote', [UserController::class, 'demote'])->name('users.demote');
 
 Route::resource('news', NewsController::class);
+
+Route::resource('FAQCategories', FAQCategoriesController::class);
+Route::resource('FAQ', FAQuestionsController::class);
 
 Auth::routes();
 
