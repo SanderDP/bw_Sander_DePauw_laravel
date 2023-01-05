@@ -25,7 +25,7 @@
                         @if (Auth::user() == $user)
                             <button onclick="location.href='{{route('users.edit', $user->id)}}'" type="button" class="btn btn-primary">Edit</button>
                         @endif
-                        @if (Auth::user()->is_admin)
+                        @if (Auth::user()->is_admin && Auth::user() != $user)
                             @if ($user->is_admin)
                                 <button onclick="location.href='{{route('users.demote', $user->id)}}'" type="button" class="btn btn-danger">Remove admin status</button>
                             @else
