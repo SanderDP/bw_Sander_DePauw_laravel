@@ -32,6 +32,7 @@ Route::get('users/{user}/demote', [UserController::class, 'demote'])->name('user
 Route::resource('news', NewsController::class);
 
 Route::resource('FAQCategories', FAQCategoriesController::class);
+Route::get('FAQ/create/{FAQ}', [FAQuestionsController::class, 'create'])->name('FAQ.createWithID');
 Route::resource('FAQ', FAQuestionsController::class);
 
 Auth::routes();

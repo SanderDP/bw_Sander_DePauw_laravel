@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\FAQCategories;
 use App\Models\FAQuestions;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class FAQuestionsController extends Controller
 {
@@ -24,9 +25,12 @@ class FAQuestionsController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create($id)
     {
-        //
+        if(!Auth::user()->is_admin){
+            abort(403, 'Only admins can add new questions.');
+        }
+        return view('FAQ.questions.create', ['id'=>$id]);
     }
 
     /**
@@ -37,8 +41,23 @@ class FAQuestionsController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        if(!Auth::user()->is_admin){
+            abort(403, 'Only admins can add new questions.');
+        }
 
+        $validated = $request->validate([
+            'question' => 'required|min:5',
+            'answer' => 'required|min:5',
+            'category_id' => 'required',
+        ]);
+
+        $question = new FAQuestions;
+        $question->question = $validated['question'];
+        $question->answer = $validated['answer'];
+        $question->f_a_q_categories_id = $validated['category_id'];
+        $question->save();
+
+        return redirect()->route('FAQ.index')->with('status', 'Question added');
     }
 
     /**

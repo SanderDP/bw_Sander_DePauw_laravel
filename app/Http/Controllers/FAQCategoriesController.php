@@ -28,9 +28,12 @@ class FAQCategoriesController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create($id)
     {
-        return view('FAQ.categories.create');
+        if(!Auth::user()->is_admin){
+            abort(403, 'Only admins can add new categories.');
+        }
+        return view('FAQ.categories.create', $id);
     }
 
     /**
