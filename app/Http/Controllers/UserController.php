@@ -70,4 +70,32 @@ class UserController extends Controller
 
         return redirect()->route('users.show', $user->id)->with('status', 'Profile info updated');
     }
+
+    public function promote($id)
+    {
+        $user = User::where('id', '=', $id)->firstOrFail();
+
+        if(!Auth::user()->is_admin){
+            abort(403, 'Only admins can promote users.');
+        }
+
+        $user->is_admin = true;
+        $user->save();
+
+        return redirect()->route('users.show', $user->id)->with('status', 'User promoted to admin');
+    }
+
+    public function demote($id)
+    {
+        $user = User::where('id', '=', $id)->firstOrFail();
+
+        if(!Auth::user()->is_admin){
+            abort(403, 'Only admins can demote users.');
+        }
+
+        $user->is_admin = false;
+        $user->save();
+
+        return redirect()->route('users.show', $user->id)->with('status', 'User admin status revoked');
+    }
 }

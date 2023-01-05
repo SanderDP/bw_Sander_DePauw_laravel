@@ -22,6 +22,8 @@ Route::get('/about', function(){
 });
 
 Route::resource('users', UserController::class);
+Route::get('users/{user}/promote', [UserController::class, 'promote'])->name('users.promote');
+Route::get('users/{user}/demote', [UserController::class, 'demote'])->name('users.demote');
 
 Route::resource('news', NewsController::class);
 
