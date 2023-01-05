@@ -79,7 +79,12 @@ class FAQuestionsController extends Controller
      */
     public function edit($id)
     {
-        //
+        $question = FAQuestions::where('id', '=', $id)->firstOrFail();
+
+        if(!Auth::user()->is_admin){
+            abort(403, 'Only admins can edit questions.');
+        }
+        return view('FAQ.questions.edit', compact('question'));
     }
 
     /**
@@ -91,7 +96,22 @@ class FAQuestionsController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $question = FAQuestions::where('id', '=', $id)->firstOrFail();
+
+        if(!Auth::user()->is_admin){
+            abort(403, 'Only admins can edit questions.');
+        }
+
+        $validated = $request->validate([
+            'question' => 'required|min:5',
+            'answer' => 'required|min:5'
+        ]);
+
+        $question->question = $validated['question'];
+        $question->answer = $validated['answer'];
+        $question->save();
+
+        return redirect()->route('FAQ.index')->with('status', 'Question updated');
     }
 
     /**
