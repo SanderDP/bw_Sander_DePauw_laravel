@@ -116,6 +116,14 @@ class FAQCategoriesController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $category = FAQCategories::findOrFail($id);
+
+        if(!Auth::user()->is_admin){
+            abort(403, 'Only admins can delte categories.');
+        }
+
+        $category->delete();
+
+        return redirect()->route('FAQ.index')->with('status', 'Category deleted');
     }
 }
