@@ -30,7 +30,7 @@ class FAQCategoriesController extends Controller
      */
     public function create()
     {
-        //
+        return view('FAQ.categories.create');
     }
 
     /**
@@ -41,8 +41,19 @@ class FAQCategoriesController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        if(!Auth::user()->is_admin){
+            abort(403, 'Only admins can add new categories.');
+        }
 
+        $validated = $request->validate([
+            'name' => 'required|min:3',
+        ]);
+
+        $category = new FAQCategories;
+        $category->name = $validated['name'];
+        $category->save();
+
+        return redirect()->route('FAQ.index')->with('status', 'Category added');
     }
 
     /**
