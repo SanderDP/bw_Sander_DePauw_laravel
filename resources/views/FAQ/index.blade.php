@@ -46,7 +46,7 @@
                                             <button type="button" class="btn btn-info dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">Options</button>
                                             <ul class="dropdown-menu">
                                                 <li>
-                                                    <form action="{{route('FAQ.destroy', $question->id)}}">
+                                                    <form method="POST" action="{{route('FAQ.destroy', $question->id)}}">
                                                         @csrf
                                                         @method("delete")
                                                         <button onclick="location.href='{{route('FAQ.edit', $question->id)}}'" type="button" class="btn btn-primary">Edit Question</button>

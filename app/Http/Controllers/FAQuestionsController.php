@@ -122,6 +122,14 @@ class FAQuestionsController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $question = FAQuestions::where('id', '=', $id)->firstOrFail();
+
+        if(!Auth::user()->is_admin){
+            abort(403, 'Only admins can delete questions.');
+        }
+
+        $question->delete();
+
+        return redirect()->route('FAQ.index')->with('status', 'Question deleted');
     }
 }
