@@ -28,12 +28,12 @@ class FAQCategoriesController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create($id)
+    public function create()
     {
         if(!Auth::user()->is_admin){
             abort(403, 'Only admins can add new categories.');
         }
-        return view('FAQ.categories.create', $id);
+        return view('FAQ.categories.create');
     }
 
     /**
@@ -122,7 +122,11 @@ class FAQCategoriesController extends Controller
         $category = FAQCategories::findOrFail($id);
 
         if(!Auth::user()->is_admin){
-            abort(403, 'Only admins can delte categories.');
+            abort(403, 'Only admins can delete categories.');
+        }
+
+        foreach($category->questions as $question){
+            $question->delete();
         }
 
         $category->delete();
