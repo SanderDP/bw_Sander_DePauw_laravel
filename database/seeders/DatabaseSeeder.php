@@ -76,5 +76,11 @@ class DatabaseSeeder extends Seeder
             'answer' => 'Here is the answer to this question.',
             'f_a_q_categories_id' => 2,
         ]);
+
+        \App\Models\ContactForms::factory()->create([
+            'name' => 'Sander',
+            'mail' => 'sander.de.pauw@student.ehb.be',
+            'message' => 'Lorem ipsum, dolor sit amet consectetur adipisicing elit. Necessitatibus vel est doloremque facere possimus nesciunt iure numquam iusto, laboriosam, eveniet dicta, temporibus nemo incidunt unde! Veritatis quae nobis quis minima!',
+        ]);
     }
 }

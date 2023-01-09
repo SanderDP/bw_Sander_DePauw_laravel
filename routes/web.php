@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\ContactFormsController;
 use App\Http\Controllers\FAQCategoriesController;
 use App\Http\Controllers\FAQuestionsController;
 use Illuminate\Support\Facades\Route;
@@ -34,6 +35,8 @@ Route::resource('news', NewsController::class);
 Route::resource('FAQCategories', FAQCategoriesController::class);
 Route::get('FAQ/create/{FAQ}', [FAQuestionsController::class, 'create'])->name('FAQ.createWithID');
 Route::resource('FAQ', FAQuestionsController::class);
+
+Route::resource('contact', ContactFormsController::class);
 
 Auth::routes();
 
