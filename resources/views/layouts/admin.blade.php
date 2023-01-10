@@ -32,6 +32,9 @@
                     <!-- Left Side Of Navbar -->
                     <ul class="navbar-nav me-auto">
                         <li class="nav-item">
+                            <a class="nav-link" href="#">Products</a>
+                        </li>
+                        <li class="nav-item">
                             <a class="nav-link" href="#">Orders</a>
                         </li>
                         <li class="nav-item">

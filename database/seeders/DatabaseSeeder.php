@@ -82,5 +82,21 @@ class DatabaseSeeder extends Seeder
             'mail' => 'sander.de.pauw@student.ehb.be',
             'message' => 'Lorem ipsum, dolor sit amet consectetur adipisicing elit. Necessitatibus vel est doloremque facere possimus nesciunt iure numquam iusto, laboriosam, eveniet dicta, temporibus nemo incidunt unde! Veritatis quae nobis quis minima!',
         ]);
+
+        \App\Models\Orders::factory()->create([
+            'user_id' => 1,
+        ]);
+
+        \App\Models\Products::factory()->create([
+            'name' => 'Whole wheat bread',
+            'img_file_path' => 'wholewheatbread.jpg',
+            'price' => 1.50,
+        ])->orders()->attach(1, ['amount' => 2]);
+
+        \App\Models\Products::factory()->create([
+            'name' => 'Baguette',
+            'img_file_path' => 'baguette.jpg',
+            'price' => 2.30,
+        ])->orders()->attach(1, ['amount' => 1]);
     }
 }
