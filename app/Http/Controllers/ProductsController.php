@@ -45,7 +45,7 @@ class ProductsController extends Controller
         $validated = $request->validate([
             'name' => 'required|min:3',
             'description' => 'required|min:5',
-            'price' => 'required|numeric',
+            'price' => 'required|numeric|min:0',
             'file' => 'mimes:png,jpg',
         ]);
         
@@ -95,7 +95,7 @@ class ProductsController extends Controller
         $validated = $request->validate([
             'name' => 'required|min:3',
             'description' => 'required|min:5',
-            'price' => 'required|numeric',
+            'price' => 'required|numeric|min:0',
         ]);
 
         if($request->hasFile('file')){
