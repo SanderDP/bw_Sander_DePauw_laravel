@@ -34,6 +34,9 @@ class NewsController extends Controller
      */
     public function create()
     {
+        if(!Auth::user()->is_admin){
+            abort(403, 'Only admins can add posts.');
+        }
         return view('news.create');
     }
 
@@ -45,6 +48,10 @@ class NewsController extends Controller
      */
     public function store(Request $request)
     {
+        if(!Auth::user()->is_admin){
+            abort(403, 'Only admins can add posts.');
+        }
+
         $validated = $request->validate([
             'title' => 'required|min:5',
             'content' => 'required|min:5',
@@ -62,17 +69,6 @@ class NewsController extends Controller
 
         return redirect()->route('index')->with('status', 'Newspost added');
 
-    }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        //
     }
 
     /**

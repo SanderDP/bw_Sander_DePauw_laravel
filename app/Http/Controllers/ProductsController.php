@@ -31,6 +31,9 @@ class ProductsController extends Controller
      */
     public function create()
     {
+        if(!Auth::user()->is_admin){
+            abort(403, 'Only admins can create products.');
+        }
         return view('products.create');
     }
 
@@ -42,6 +45,10 @@ class ProductsController extends Controller
      */
     public function store(Request $request)
     {
+        if(!Auth::user()->is_admin){
+            abort(403, 'Only admins can create products.');
+        }
+        
         $validated = $request->validate([
             'name' => 'required|min:3',
             'description' => 'required|min:5',
