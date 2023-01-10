@@ -42,7 +42,7 @@ Route::resource('contact', ContactFormsController::class);
 
 Route::resource('products', ProductsController::class);
 
-Route::resource('order', OrdersController::class);
+Route::resource('orders', OrdersController::class);
 
 Auth::routes();
 
