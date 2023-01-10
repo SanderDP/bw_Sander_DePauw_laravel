@@ -1,4 +1,11 @@
-@extends('layouts.app')
+<?php $layout = 'layouts.app' ?>
+@auth
+    @if (Auth::user()->is_admin)
+        <?php $layout = 'layouts.admin' ?>
+    @endif
+@endauth
+
+@extends($layout)
 
 @section('content')
 <div class="container">
