@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Orders;
+use App\Models\Products;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -35,7 +36,8 @@ class OrdersController extends Controller
      */
     public function create()
     {
-        return view('orders.create');
+        $products = Products::all();
+        return view('orders.create', compact('products'));
     }
 
     /**
@@ -46,18 +48,31 @@ class OrdersController extends Controller
      */
     public function store(Request $request)
     {
-        //
-    }
+        $order = new Orders();
+        $totalamount = 0;
+        foreach(Products::all() as $product){
+            $request->validate([
+                'amount_' . $product->id => 'required|min:0'
+            ]);
+            
+            $totalamount += $request['amount_' . $product->id];
+        }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Models\Orders  $orders
-     * @return \Illuminate\Http\Response
-     */
-    public function show(Orders $orders)
-    {
-        //
+        if ($totalamount == 0){
+            return redirect()->route('orders.create') -> with('status', 'You have to add at least one product to your purchase.');
+        }
+
+        $order->user_id = Auth::user()->id;
+        $order->save();
+
+        foreach($request->request as $key => $amount){
+            if ($key != '_token'){
+                if ($amount > 0)
+                    $order->products()->attach(substr($key, -1), ['amount' => $amount]);
+            }
+        }
+
+        return redirect()->route('products.index')->with('status', 'Order placed');
     }
 
     /**

@@ -26,6 +26,7 @@
                            <button onclick="location.href='{{route('products.create')}}'" type="button" class="btn btn-primary">Add New Product</button>
                         @endif
                     @endauth
+                    <button onclick="location.href='{{route('orders.create')}}'" type="button" class="btn btn-success">Place an order</button>
 
                     <div class="row">
                     @foreach($products as $product)

@@ -49,9 +49,9 @@
                                 <tfoot>
                                     <tr>
                                         <td class="visible-xs"><small>{{$order->created_at->format('d M Y H:i:s')}}</small></td>
-                                        <td colspan="1" class="hidden-xs"></td>
+                                        <td colspan="2" class="hidden-xs"></td>
                                         <td class="visible-xs">
-                                            <td class="text-center"><strong>Total: €{{ number_format($total, 2, '.', '') }}</strong></td>
+                                            <strong>Total: €{{ number_format($total, 2, '.', '') }}</strong></td>
                                         </td>
                                     </tr>
                                 </tfoot>
