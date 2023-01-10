@@ -144,7 +144,7 @@ class NewsController extends Controller
         $post = News::findOrFail($id);
 
         if(!Auth::user()->is_admin){
-            abort(403, 'Only admins can delte posts.');
+            abort(403, 'Only admins can delete posts.');
         }
 
         $image_path = public_path('news'). '/' . $post->img_file_path;

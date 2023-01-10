@@ -5,6 +5,8 @@ use App\Http\Controllers\FAQCategoriesController;
 use App\Http\Controllers\FAQuestionsController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\NewsController;
+use App\Http\Controllers\OrdersController;
+use App\Http\Controllers\ProductsController;
 use App\Http\Controllers\UserController;
 use App\Models\FAQCategories;
 use App\Models\FAQuestions;
@@ -37,6 +39,10 @@ Route::get('FAQ/create/{FAQ}', [FAQuestionsController::class, 'create'])->name('
 Route::resource('FAQ', FAQuestionsController::class);
 
 Route::resource('contact', ContactFormsController::class);
+
+Route::resource('products', ProductsController::class);
+
+Route::resource('order', OrdersController::class);
 
 Auth::routes();
 
