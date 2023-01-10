@@ -23,6 +23,7 @@
         <li><a href="https://getbootstrap.com/docs/5.0/components/badge/">Bootstrap badges</a></li>
         <li><a href="https://larainfo.com/blogs/how-to-use-datepicker-in-laravel-9-with-bootstrap-5">Datepicker</a></li>
         <li><a href="https://laravel.com/docs/9.x/eloquent-relationships#has-many-through">Bootstrap Eloquent relationships</a></li>
+        <li><a href="https://laraveldaily.com/post/pivot-tables-and-many-to-many-relationships">Using pivot tables</a></li>
     </ul>
 </div>
 @endsection
