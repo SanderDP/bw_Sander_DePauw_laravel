@@ -27,26 +27,30 @@
                         @endif
                     @endauth
 
+                    <div class="row">
                     @foreach($products as $product)
-                    <div class="card mb-3">
-                        <img class="card-img-top" src={{asset("storage/products/$product->img_file_path")}} alt="Card image cap">
-                        <div class="card-body">
-                            <h5 class="card-title">{{$product->name}}</h5>
-                            <p class="card-text">{{$product->description}}</p>
-                            <p class="card-text"><small class="text-muted">Price: €{{$product->price}}</small></p>
-                            @auth
-                                @if (Auth::user()->is_admin)
-                                    <form method="POST" action="{{route('products.destroy', $product->id)}}">
-                                        @csrf
-                                        @method("delete")
-                                        <button onclick="location.href='{{route('products.edit', $product->id)}}'" type="button" class="btn btn-primary">Edit</button>
-                                        <input type="submit" value="Delete" class="btn btn-danger" onclick="return confirm('Are you sure you want to delete this product?');">
-                                    </form>
-                                @endif
-                            @endauth
+                    <div class="col-4">
+                        <div class="card mb-3">
+                            <img class="card-img-top" src={{asset("storage/products/$product->img_file_path")}} alt="Card image cap">
+                            <div class="card-body">
+                                <h5 class="card-title">{{$product->name}}</h5>
+                                <p class="card-text">{{$product->description}}</p>
+                                <p class="card-text"><small class="text-muted">Price: €{{$product->price}}</small></p>
+                                @auth
+                                    @if (Auth::user()->is_admin)
+                                        <form method="POST" action="{{route('products.destroy', $product->id)}}">
+                                            @csrf
+                                            @method("delete")
+                                            <button onclick="location.href='{{route('products.edit', $product->id)}}'" type="button" class="btn btn-primary">Edit</button>
+                                            <input type="submit" value="Delete" class="btn btn-danger" onclick="return confirm('Are you sure you want to delete this product?');">
+                                        </form>
+                                    @endif
+                                @endauth
+                            </div>
                         </div>
                     </div>
                     @endforeach
+                    </div>
 
                 </div>
             </div>
