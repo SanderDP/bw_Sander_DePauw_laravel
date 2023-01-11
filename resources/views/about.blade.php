@@ -9,6 +9,13 @@
 
 @section('content')
 <div class="container">
+    <p class="card-text">
+        In this website you can check products, place orders, check out the latest news, scroll through the different user profiles, edit your own profile, look at the frequently asked questions and contact us through the contact us form.
+    </p>
+    <p class="card-text">
+        Some features like granting users admin priviliges, looking at all the placed orders, adding news posts, editing the FAQs and checking out the submitted contact forms are only available to admins.
+    </p>
+    <p class="card-text">In this page the resources I used during development of this website are available.</p>
     <ul>
         <li><a href="https://laravel.com/docs/9.x/installation#your-first-laravel-project">Laravel installation</a></li>
         <li><a href="https://github.com/SanderDP/bw_Sander_DePauw_laravel">My Github location</a></li>

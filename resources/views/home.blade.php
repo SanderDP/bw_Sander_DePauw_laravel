@@ -21,8 +21,13 @@
                     </div>
                     @endif
 
-                    <h1>Welcome to the home menu</h1>
-
+                    <h1 class="card-title">Welcome to the home menu of Bakkerij_Laravel_Project</h1>
+                    <p class="card-text">
+                        In this website you can check products, place orders, check out the latest news, scroll through the different user profiles, edit your own profile, look at the frequently asked questions and contact us through the contact us form.
+                    </p>
+                    <p class="card-text">
+                        Some features like granting users admin priviliges, looking at all the placed orders, adding news posts, editing the FAQs and checking out the submitted contact forms are only available to admins.
+                    </p>
                 </div>
             </div>
         </div>
