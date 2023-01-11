@@ -22,7 +22,7 @@ class ContactFormsController extends Controller
             return view('contact.admin', compact('contactforms'));
         }
         else
-            return redirect()->route('create');
+            return redirect()->route('contact.create');
     }
 
     /**
